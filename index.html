@@ -1,850 +1,419 @@
 <!DOCTYPE html>
 <html lang="en">
- 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Message for Dad 🎂</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap');
- 
-    :root {
-      --gold: #C9973A;
-      --cream: #FBF6EE;
-      --ink: #1A1208;
-      --smoke: #F1EBE0;
-      --blush: #E8D5B7;
-    }
- 
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
- 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--cream);
-      color: var(--ink);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
- 
-    /* ── HERO ── */
-    .hero {
-      position: relative;
-      text-align: center;
-      padding: 72px 24px 56px;
-      overflow: hidden;
-    }
- 
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% 0%, #F5DFA0 0%, transparent 70%);
-      pointer-events: none;
-    }
- 
-    .candles {
-      font-size: 2rem;
-      letter-spacing: 4px;
-      margin-bottom: 20px;
-      animation: flicker 3s ease-in-out infinite alternate;
-    }
- 
-    @keyframes flicker {
-      0% {
-        opacity: 1;
-        transform: scale(1);
-      }
- 
-      50% {
-        opacity: 0.85;
-        transform: scale(1.03);
-      }
- 
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
- 
-    .hero h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2.2rem, 6vw, 4rem);
-      line-height: 1.1;
-      margin-bottom: 8px;
-    }
- 
-    .hero h1 em {
-      font-style: italic;
-      color: var(--gold);
-    }
- 
-    .hero p.sub {
-      font-size: 1.05rem;
-      font-weight: 300;
-      color: #6B5B3E;
-      max-width: 480px;
-      margin: 12px auto 0;
-      line-height: 1.6;
-    }
- 
-    .divider {
-      width: 48px;
-      height: 2px;
-      background: var(--gold);
-      margin: 28px auto;
-      border-radius: 2px;
-    }
- 
-    /* ── CARD ── */
-    .card {
-      background: #fff;
-      border: 1px solid var(--blush);
-      border-radius: 20px;
-      padding: 36px 32px;
-      max-width: 560px;
-      margin: 0 auto 20px;
-      box-shadow: 0 4px 32px rgba(100, 70, 20, .07);
-    }
- 
-    /* ── STEPS ── */
-    .steps {
-      display: flex;
-      gap: 0;
-      margin-bottom: 32px;
-      border-bottom: 1px solid var(--smoke);
-      padding-bottom: 20px;
-    }
- 
-    .step {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: #B0967A;
-      text-transform: uppercase;
-      letter-spacing: .8px;
-      transition: color .3s;
-    }
- 
-    .step.active {
-      color: var(--ink);
-    }
- 
-    .step.done {
-      color: var(--gold);
-    }
- 
-    .step-dot {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      border: 2px solid currentColor;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      font-weight: 600;
-      transition: background .3s, color .3s;
-    }
- 
-    .step.active .step-dot {
-      background: var(--ink);
-      color: #fff;
-      border-color: var(--ink);
-    }
- 
-    .step.done .step-dot {
-      background: var(--gold);
-      color: #fff;
-      border-color: var(--gold);
-    }
- 
-    .step-connector {
-      flex: 0 0 24px;
-      height: 2px;
-      background: var(--smoke);
-      align-self: center;
-      margin-bottom: 22px;
-    }
- 
-    /* ── FORM ── */
-    .section {
-      display: none;
-    }
- 
-    .section.visible {
-      display: block;
-    }
- 
-    label {
-      display: block;
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: .4px;
-      text-transform: uppercase;
-      color: #8A7260;
-      margin-bottom: 8px;
-    }
- 
-    input[type="text"] {
-      width: 100%;
-      padding: 14px 16px;
-      border: 1.5px solid var(--blush);
-      border-radius: 10px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 1rem;
-      color: var(--ink);
-      background: var(--cream);
-      outline: none;
-      transition: border-color .2s;
-    }
- 
-    input[type="text"]:focus {
-      border-color: var(--gold);
-    }
- 
-    .hint {
-      font-size: 0.82rem;
-      color: #A0896E;
-      margin-top: 6px;
-      line-height: 1.5;
-    }
- 
-    /* ── RECORD ZONE ── */
-    .record-zone {
-      position: relative;
-      background: var(--smoke);
-      border-radius: 14px;
-      overflow: hidden;
-      aspect-ratio: 16/9;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 16px;
-      border: 2px dashed var(--blush);
-      cursor: pointer;
-      transition: border-color .2s;
-    }
- 
-    .record-zone.has-video {
-      border-style: solid;
-      border-color: var(--gold);
-    }
- 
-    .record-zone video {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 12px;
-    }
- 
-    .record-zone .overlay-icon {
-      font-size: 2.5rem;
-      z-index: 2;
-    }
- 
-    .record-zone .overlay-label {
-      font-size: 0.9rem;
-      color: #8A7260;
-      z-index: 2;
-      font-weight: 500;
-    }
- 
-    .rec-timer {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: rgba(214, 69, 69, .85);
-      color: #fff;
-      padding: 4px 10px;
-      border-radius: 100px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      z-index: 10;
-      display: none;
-    }
- 
-    /* ── BUTTONS ── */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 22px;
-      border-radius: 100px;
-      border: none;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.92rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all .2s;
-      text-decoration: none;
-    }
- 
-    .btn-primary {
-      background: var(--ink);
-      color: #fff;
-    }
- 
-    .btn-primary:hover {
-      background: #3A2A10;
-      transform: translateY(-1px);
-    }
- 
-    .btn-gold {
-      background: var(--gold);
-      color: #fff;
-    }
- 
-    .btn-gold:hover {
-      background: #b5862e;
-      transform: translateY(-1px);
-    }
- 
-    .btn-outline {
-      background: transparent;
-      color: var(--ink);
-      border: 1.5px solid var(--blush);
-    }
- 
-    .btn-outline:hover {
-      border-color: var(--gold);
-    }
- 
-    .btn-record {
-      background: #D64545;
-      color: #fff;
-    }
- 
-    .btn-record:hover {
-      background: #b83838;
-    }
- 
-    .btn-record.recording {
-      animation: pulse-red 1.2s ease-in-out infinite;
-    }
- 
-    @keyframes pulse-red {
- 
-      0%,
-      100% {
-        box-shadow: 0 0 0 0 rgba(214, 69, 69, .4);
-      }
- 
-      50% {
-        box-shadow: 0 0 0 10px rgba(214, 69, 69, 0);
-      }
-    }
- 
-    .btn:disabled {
-      opacity: .4;
-      cursor: not-allowed;
-      transform: none !important;
-    }
- 
-    /* ── MODE TABS ── */
-    .mode-tabs {
-      display: flex;
-      background: var(--smoke);
-      border-radius: 12px;
-      padding: 4px;
-      margin-bottom: 20px;
-      gap: 4px;
-    }
- 
-    .mode-tab {
-      flex: 1;
-      padding: 10px;
-      text-align: center;
-      border-radius: 9px;
-      font-size: 0.88rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all .2s;
-      color: #8A7260;
-      border: none;
-      background: transparent;
-      font-family: 'DM Sans', sans-serif;
-    }
- 
-    .mode-tab.active {
-      background: #fff;
-      color: var(--ink);
-      box-shadow: 0 1px 6px rgba(0, 0, 0, .08);
-    }
- 
-    /* ── UPLOAD DROP ── */
-    .upload-drop {
-      border: 2px dashed var(--blush);
-      border-radius: 14px;
-      padding: 28px 20px;
-      text-align: center;
-      cursor: pointer;
-      transition: all .2s;
-      margin-top: 12px;
-    }
- 
-    .upload-drop:hover,
-    .upload-drop.dragover {
-      border-color: var(--gold);
-      background: #FDF8EF;
-    }
- 
-    .upload-drop input {
-      display: none;
-    }
- 
-    .upload-drop .drop-icon {
-      font-size: 2rem;
-      margin-bottom: 8px;
-    }
- 
-    .upload-drop p {
-      font-size: 0.9rem;
-      color: #8A7260;
-    }
- 
-    /* ── PROGRESS ── */
-    .progress-wrap {
-      background: var(--smoke);
-      border-radius: 100px;
-      height: 8px;
-      overflow: hidden;
-      margin: 20px 0 6px;
-      display: none;
-    }
- 
-    .progress-bar {
-      height: 100%;
-      background: linear-gradient(90deg, var(--gold), #E8B860);
-      border-radius: 100px;
-      width: 0%;
-      transition: width .4s ease;
-    }
- 
-    .progress-label {
-      font-size: 0.82rem;
-      color: #8A7260;
-      text-align: center;
-      min-height: 20px;
-    }
- 
-    /* ── SUCCESS ── */
-    .success-view {
-      text-align: center;
-      padding: 20px 0;
-    }
- 
-    .success-icon {
-      font-size: 4rem;
-      margin-bottom: 16px;
-      animation: pop .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
- 
-    @keyframes pop {
-      from {
-        transform: scale(0);
-        opacity: 0;
-      }
- 
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
- 
-    .success-view h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-    }
- 
-    .success-view p {
-      color: #6B5B3E;
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
- 
-    /* ── RECORD CONTROLS ── */
-    .record-controls {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
- 
-    .footer-note {
-      text-align: center;
-      font-size: 0.78rem;
-      color: #B0967A;
-      padding: 0 24px 48px;
-      line-height: 1.6;
-    }
- 
-    @media(max-width: 600px) {
-      .card {
-        padding: 24px 18px;
-        margin: 0 16px 20px;
-      }
- 
-      .hero {
-        padding: 52px 20px 40px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Message for Dad 🎂</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap');
+  :root{--gold:#C9973A;--cream:#FBF6EE;--ink:#1A1208;--smoke:#F1EBE0;--blush:#E8D5B7}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;overflow-x:hidden}
+  .hero{position:relative;text-align:center;padding:72px 24px 56px;overflow:hidden}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,#F5DFA0 0%,transparent 70%);pointer-events:none}
+  .candles{font-size:2rem;letter-spacing:4px;margin-bottom:20px;animation:flicker 3s ease-in-out infinite alternate}
+  @keyframes flicker{0%{opacity:1;transform:scale(1)}50%{opacity:.85;transform:scale(1.03)}100%{opacity:1;transform:scale(1)}}
+  .hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2.2rem,6vw,4rem);line-height:1.1;margin-bottom:8px}
+  .hero h1 em{font-style:italic;color:var(--gold)}
+  .hero p.sub{font-size:1.05rem;font-weight:300;color:#6B5B3E;max-width:480px;margin:12px auto 0;line-height:1.6}
+  .divider{width:48px;height:2px;background:var(--gold);margin:28px auto;border-radius:2px}
+  .card{background:#fff;border:1px solid var(--blush);border-radius:20px;padding:36px 32px;max-width:560px;margin:0 auto 20px;box-shadow:0 4px 32px rgba(100,70,20,.07)}
+  .steps{display:flex;margin-bottom:32px;border-bottom:1px solid var(--smoke);padding-bottom:20px}
+  .step{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:.78rem;font-weight:500;color:#B0967A;text-transform:uppercase;letter-spacing:.8px;transition:color .3s}
+  .step.active{color:var(--ink)}.step.done{color:var(--gold)}
+  .step-dot{width:28px;height:28px;border-radius:50%;border:2px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:600;transition:background .3s,color .3s}
+  .step.active .step-dot{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .step.done .step-dot{background:var(--gold);color:#fff;border-color:var(--gold)}
+  .step-connector{flex:0 0 24px;height:2px;background:var(--smoke);align-self:center;margin-bottom:22px}
+  .section{display:none}.section.visible{display:block}
+  label{display:block;font-size:.82rem;font-weight:500;letter-spacing:.4px;text-transform:uppercase;color:#8A7260;margin-bottom:8px}
+  input[type=text]{width:100%;padding:14px 16px;border:1.5px solid var(--blush);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:1rem;color:var(--ink);background:var(--cream);outline:none;transition:border-color .2s}
+  input[type=text]:focus{border-color:var(--gold)}
+  .hint{font-size:.82rem;color:#A0896E;margin-top:6px;line-height:1.5}
+  .record-zone{position:relative;background:var(--smoke);border-radius:14px;overflow:hidden;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;margin-bottom:16px;border:2px dashed var(--blush);transition:border-color .2s}
+  .record-zone.has-video{border-style:solid;border-color:var(--gold)}
+  .record-zone video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:12px}
+  .overlay-icon{font-size:2.5rem;z-index:2}.overlay-label{font-size:.9rem;color:#8A7260;z-index:2;font-weight:500}
+  .rec-timer{position:absolute;top:12px;right:12px;background:rgba(214,69,69,.85);color:#fff;padding:4px 10px;border-radius:100px;font-size:.82rem;font-weight:600;z-index:10;display:none}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:100px;border:none;font-family:'DM Sans',sans-serif;font-size:.92rem;font-weight:500;cursor:pointer;transition:all .2s}
+  .btn-primary{background:var(--ink);color:#fff}.btn-primary:hover{background:#3A2A10;transform:translateY(-1px)}
+  .btn-gold{background:var(--gold);color:#fff}.btn-gold:hover{background:#b5862e;transform:translateY(-1px)}
+  .btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--blush)}.btn-outline:hover{border-color:var(--gold)}
+  .btn-record{background:#D64545;color:#fff}.btn-record:hover{background:#b83838}
+  .btn-record.recording{animation:pulse-red 1.2s ease-in-out infinite}
+  @keyframes pulse-red{0%,100%{box-shadow:0 0 0 0 rgba(214,69,69,.4)}50%{box-shadow:0 0 0 10px rgba(214,69,69,0)}}
+  .btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important}
+  .mode-tabs{display:flex;background:var(--smoke);border-radius:12px;padding:4px;margin-bottom:20px;gap:4px}
+  .mode-tab{flex:1;padding:10px;text-align:center;border-radius:9px;font-size:.88rem;font-weight:500;cursor:pointer;transition:all .2s;color:#8A7260;border:none;background:transparent;font-family:'DM Sans',sans-serif}
+  .mode-tab.active{background:#fff;color:var(--ink);box-shadow:0 1px 6px rgba(0,0,0,.08)}
+  .upload-drop{border:2px dashed var(--blush);border-radius:14px;padding:28px 20px;text-align:center;cursor:pointer;transition:all .2s;margin-top:12px}
+  .upload-drop:hover,.upload-drop.dragover{border-color:var(--gold);background:#FDF8EF}
+  .upload-drop input{display:none}.drop-icon{font-size:2rem;margin-bottom:8px}.upload-drop p{font-size:.9rem;color:#8A7260}
+  .progress-wrap{background:var(--smoke);border-radius:100px;height:8px;overflow:hidden;margin:20px 0 6px;display:none}
+  .progress-bar{height:100%;background:linear-gradient(90deg,var(--gold),#E8B860);border-radius:100px;width:0%;transition:width .4s ease}
+  .progress-label{font-size:.82rem;color:#8A7260;text-align:center;min-height:20px}
+  .compress-notice{background:#FDF8EF;border:1px solid var(--blush);border-radius:10px;padding:12px 16px;font-size:.82rem;color:#6B5B3E;margin-bottom:16px;display:none;line-height:1.5}
+  .record-controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:20px}
+  .success-view{text-align:center;padding:20px 0}
+  .success-icon{font-size:4rem;margin-bottom:16px;animation:pop .5s cubic-bezier(.175,.885,.32,1.275)}
+  @keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+  .success-view h2{font-family:'DM Serif Display',serif;font-size:1.8rem;margin-bottom:10px}
+  .success-view p{color:#6B5B3E;font-size:.95rem;line-height:1.6}
+  .footer-note{text-align:center;font-size:.78rem;color:#B0967A;padding:0 24px 48px;line-height:1.6}
+  @media(max-width:600px){.card{padding:24px 18px;margin:0 16px 20px}.hero{padding:52px 20px 40px}}
+</style>
 </head>
- 
 <body>
- 
-  <div class="hero">
-    <div class="candles">🕯️🎂🕯️</div>
-    <h1>Happy Birthday,<br><em>Dad</em></h1>
-    <p class="sub">Leave him a video message — we're putting together something special. It takes 60 seconds.</p>
-    <div class="divider"></div>
+
+<div class="hero">
+  <div class="candles">🕯️🎂🕯️</div>
+  <h1>Happy Birthday,<br><em>Dad</em></h1>
+  <p class="sub">Leave him a video message — we're putting together something special. It only takes a minute.</p>
+  <div class="divider"></div>
+</div>
+
+<div class="card">
+  <div class="steps">
+    <div class="step active" id="step1"><div class="step-dot">1</div><span>You</span></div>
+    <div class="step-connector"></div>
+    <div class="step" id="step2"><div class="step-dot">2</div><span>Message</span></div>
+    <div class="step-connector"></div>
+    <div class="step" id="step3"><div class="step-dot">3</div><span>Send</span></div>
   </div>
- 
-  <div class="card">
-    <div class="steps">
-      <div class="step active" id="step1">
-        <div class="step-dot">1</div><span>You</span>
-      </div>
-      <div class="step-connector"></div>
-      <div class="step" id="step2">
-        <div class="step-dot">2</div><span>Message</span>
-      </div>
-      <div class="step-connector"></div>
-      <div class="step" id="step3">
-        <div class="step-dot">3</div><span>Send</span>
-      </div>
+
+  <!-- STEP 1: Name -->
+  <div class="section visible" id="sec1">
+    <label for="nameInput">Your name</label>
+    <input type="text" id="nameInput" placeholder="e.g. Priya" autocomplete="given-name"/>
+    <p class="hint">Just your first name is fine 😊</p>
+    <br>
+    <label for="relationInput">How do you know him?</label>
+    <input type="text" id="relationInput" placeholder="e.g. daughter, old colleague, cricket team..."/>
+    <br><br>
+    <button class="btn btn-primary" onclick="goToStep2()" style="width:100%;justify-content:center">Next →</button>
+  </div>
+
+  <!-- STEP 2: Record/Upload -->
+  <div class="section" id="sec2">
+    <div class="mode-tabs">
+      <button class="mode-tab active" onclick="setMode('record',this)">🎥 Record now</button>
+      <button class="mode-tab" onclick="setMode('upload',this)">📁 Upload file</button>
     </div>
- 
-    <!-- SECTION 1 -->
-    <div class="section visible" id="sec1">
-      <label for="nameInput">Your name</label>
-      <input type="text" id="nameInput" placeholder="e.g. Priya" autocomplete="given-name" />
-      <p class="hint">Just your first name is fine 😊</p>
+
+    <!-- Record -->
+    <div id="recordMode">
+      <div class="record-zone" id="recordZone">
+        <span class="overlay-icon">🎥</span>
+        <span class="overlay-label">Camera preview will appear here</span>
+        <video id="preview" muted playsinline></video>
+        <video id="playback" playsinline controls style="display:none"></video>
+        <div class="rec-timer" id="recTimer">⏺ 0:00</div>
+      </div>
+      <div class="record-controls">
+        <button class="btn btn-outline" id="btnCamera" onclick="startCamera()">📷 Open Camera</button>
+        <button class="btn btn-record" id="btnRecord" onclick="toggleRecord()" disabled>⏺ Record</button>
+        <button class="btn btn-outline" id="btnRetake" onclick="retake()" style="display:none">↩ Retake</button>
+      </div>
+      <p class="hint" style="text-align:center">Up to 3 minutes 💛</p>
+    </div>
+
+    <!-- Upload -->
+    <div id="uploadMode" style="display:none">
+      <div class="upload-drop" id="dropZone" onclick="document.getElementById('fileInput').click()">
+        <input type="file" id="fileInput" accept="video/*" onchange="handleFile(this.files[0])">
+        <div class="drop-icon">📹</div>
+        <p><strong>Tap to choose a video</strong><br>or drag and drop here<br><span style="font-size:.8rem;opacity:.7">MP4, MOV, WEBM — up to 3 mins</span></p>
+      </div>
+      <p id="uploadFileName" class="hint" style="text-align:center;margin-top:10px"></p>
+    </div>
+
+    <div class="compress-notice" id="compressNotice">
+      ⚡ We're compressing your video for faster upload — this takes a few seconds…
+    </div>
+
+    <br>
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <button class="btn btn-outline" onclick="goBack()">← Back</button>
+      <button class="btn btn-gold" id="btnSend" onclick="startUpload()" disabled>Send my message 🎁</button>
+    </div>
+    <div class="progress-wrap" id="progressWrap"><div class="progress-bar" id="progressBar"></div></div>
+    <p class="progress-label" id="progressLabel"></p>
+  </div>
+
+  <!-- STEP 3: Success -->
+  <div class="section" id="sec3">
+    <div class="success-view">
+      <div class="success-icon">🎉</div>
+      <h2>Message sent!</h2>
+      <p id="successMsg">Thank you — your video is on its way. Dad is going to love this.</p>
       <br>
-      <label for="relationInput">How do you know him?</label>
-      <input type="text" id="relationInput" placeholder="e.g. daughter, old colleague, cricket team..." />
-      <br><br>
-      <button class="btn btn-primary" onclick="goToStep2()" style="width:100%; justify-content:center;">Next →</button>
-    </div>
- 
-    <!-- SECTION 2 -->
-    <div class="section" id="sec2">
-      <div class="mode-tabs">
-        <button class="mode-tab active" onclick="setMode('record', this)">🎥 Record now</button>
-        <button class="mode-tab" onclick="setMode('upload', this)">📁 Upload file</button>
-      </div>
- 
-      <!-- RECORD -->
-      <div id="recordMode">
-        <div class="record-zone" id="recordZone">
-          <span class="overlay-icon">🎥</span>
-          <span class="overlay-label">Camera preview will appear here</span>
-          <video id="preview" muted playsinline></video>
-          <video id="playback" playsinline controls style="display:none;"></video>
-          <div class="rec-timer" id="recTimer">⏺ 0:00</div>
-        </div>
-        <div class="record-controls">
-          <button class="btn btn-outline" id="btnCamera" onclick="startCamera()">📷 Open Camera</button>
-          <button class="btn btn-record" id="btnRecord" onclick="toggleRecord()" disabled>⏺ Record</button>
-          <button class="btn btn-outline" id="btnRetake" onclick="retake()" style="display:none">↩ Retake</button>
-        </div>
-        <p class="hint" style="text-align:center">Record as long as you like 💛</p>
-      </div>
- 
-      <!-- UPLOAD -->
-      <div id="uploadMode" style="display:none">
-        <div class="upload-drop" id="dropZone" onclick="document.getElementById('fileInput').click()">
-          <input type="file" id="fileInput" accept="video/*" onchange="handleFile(this.files[0])">
-          <div class="drop-icon">📹</div>
-          <p><strong>Tap to choose a video</strong><br>or drag and drop here<br><span
-              style="font-size:.8rem;opacity:.7;">MP4, MOV, WEBM — any size</span></p>
-        </div>
-        <p id="uploadFileName" class="hint" style="text-align:center; margin-top:10px;"></p>
-      </div>
- 
-      <br>
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <button class="btn btn-outline" onclick="goBack()">← Back</button>
-        <button class="btn btn-gold" id="btnSend" onclick="uploadVideo()" disabled>Send my message 🎁</button>
-      </div>
- 
-      <div class="progress-wrap" id="progressWrap">
-        <div class="progress-bar" id="progressBar"></div>
-      </div>
-      <p class="progress-label" id="progressLabel"></p>
-    </div>
- 
-    <!-- SECTION 3 -->
-    <div class="section" id="sec3">
-      <div class="success-view">
-        <div class="success-icon">🎉</div>
-        <h2>Message sent!</h2>
-        <p id="successMsg">Thank you — your video is on its way. Dad is going to love this.</p>
-        <br>
-        <p style="font-size:.8rem; color:#B0967A;">You can close this tab now.</p>
-      </div>
+      <p style="font-size:.8rem;color:#B0967A">You can close this tab now.</p>
     </div>
   </div>
- 
-  <p class="footer-note">
-    This is a private page, shared only with people who care about this birthday 💛<br>
-    Videos are saved securely and only visible to the family.
-  </p>
- 
-  <script>
-    // ══════════════════════════════════════════════
-    //  ⚙️  CONFIG
-    // ══════════════════════════════════════════════
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwo47EsvGMzKbdC_Y1CUmAuhIllF1Peqv85m3BhmG3SEjXQOXDQRUcXeC9x1fEAjRY/exec';
- 
-    // Chunk size for resumable upload: 5MB
-    const CHUNK_SIZE = 5 * 1024 * 1024;
- 
-    let currentName = '', currentRelation = '';
-    let videoBlob = null;
-    let mediaRecorder = null, recordedChunks = [], stream = null;
-    let recInterval = null, recSeconds = 0;
-    let currentMode = 'record';
- 
-    // ── Navigation ──
-    function goToStep2() {
-      currentName = document.getElementById('nameInput').value.trim();
-      currentRelation = document.getElementById('relationInput').value.trim();
-      if (!currentName) {
-        const inp = document.getElementById('nameInput');
-        inp.focus(); inp.style.borderColor = '#D64545'; return;
-      }
-      showSection('sec2');
-      setStep(1, 'done'); setStep(2, 'active');
-    }
-    function goBack() {
-      showSection('sec1'); setStep(1, 'active'); setStep(2, '');
-    }
-    function showSection(id) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
-      document.getElementById(id).classList.add('visible');
-    }
-    function setStep(n, state) {
-      const el = document.getElementById('step' + n);
-      el.classList.remove('active', 'done');
-      if (state) el.classList.add(state);
-    }
- 
-    // ── Mode ──
-    function setMode(mode, btn) {
-      currentMode = mode;
-      document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById('recordMode').style.display = mode === 'record' ? '' : 'none';
-      document.getElementById('uploadMode').style.display = mode === 'upload' ? '' : 'none';
-      checkSendable();
-    }
- 
-    // ── Camera ──
-    async function startCamera() {
+</div>
+
+<p class="footer-note">Private page — shared only with people who care about this birthday 💛<br>Videos are saved securely and only visible to the family.</p>
+
+<script>
+// ── CONFIG ──
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwo47EsvGMzKbdC_Y1CUmAuhIllF1Peqv85m3BhmG3SEjXQOXDQRUcXeC9x1fEAjRY/exec';
+
+// Each base64 chunk sent to Apps Script: ~900KB encoded (fits well under 50MB POST limit)
+const CHUNK_B64 = 900 * 1024;
+
+// Target bitrate for compression: 400kbps video + 64kbps audio = ~3.5MB/min
+// 3 mins ≈ ~10MB raw, ~13MB base64 — about 15 chunks
+const TARGET_VIDEO_BPS = 400_000;
+const TARGET_AUDIO_BPS = 64_000;
+
+let currentName = '', currentRelation = '';
+let videoBlob = null, compressedBlob = null;
+let mediaRecorder = null, recordedChunks = [], stream = null;
+let recInterval = null, recSeconds = 0;
+
+// ── Navigation ──
+function goToStep2() {
+  currentName    = document.getElementById('nameInput').value.trim();
+  currentRelation = document.getElementById('relationInput').value.trim();
+  if (!currentName) { const i = document.getElementById('nameInput'); i.focus(); i.style.borderColor='#D64545'; return; }
+  showSection('sec2'); setStep(1,'done'); setStep(2,'active');
+}
+function goBack() { showSection('sec1'); setStep(1,'active'); setStep(2,''); }
+function showSection(id) { document.querySelectorAll('.section').forEach(s=>s.classList.remove('visible')); document.getElementById(id).classList.add('visible'); }
+function setStep(n,s) { const el=document.getElementById('step'+n); el.classList.remove('active','done'); if(s) el.classList.add(s); }
+function setMode(mode,btn) {
+  document.querySelectorAll('.mode-tab').forEach(t=>t.classList.remove('active')); btn.classList.add('active');
+  document.getElementById('recordMode').style.display  = mode==='record' ? '' : 'none';
+  document.getElementById('uploadMode').style.display  = mode==='upload' ? '' : 'none';
+  videoBlob = compressedBlob = null; checkSendable();
+}
+
+// ── Camera ──
+async function startCamera() {
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ video: { width:1280, height:720 }, audio: true });
+    const p = document.getElementById('preview'); p.srcObject = stream; p.style.display='block'; p.play();
+    document.getElementById('recordZone').classList.add('has-video');
+    document.getElementById('btnRecord').disabled = false;
+    document.getElementById('btnCamera').style.display = 'none';
+  } catch(e) { alert('Could not access camera. Please allow permission and try again.'); }
+}
+
+function toggleRecord() {
+  if (!mediaRecorder || mediaRecorder.state==='inactive') startRecording(); else stopRecording();
+}
+
+function startRecording() {
+  recordedChunks = [];
+  // Record at low bitrate directly — no re-encode needed
+  const opts = { mimeType: getSupportedMime() };
+  if (typeof MediaRecorder.isTypeSupported === 'function') {
+    opts.videoBitsPerSecond = TARGET_VIDEO_BPS;
+    opts.audioBitsPerSecond = TARGET_AUDIO_BPS;
+  }
+  mediaRecorder = new MediaRecorder(stream, opts);
+  mediaRecorder.ondataavailable = e => { if (e.data.size>0) recordedChunks.push(e.data); };
+  mediaRecorder.onstop = finaliseRecording;
+  mediaRecorder.start(500);
+
+  recSeconds = 0;
+  document.getElementById('recTimer').style.display = 'block';
+  recInterval = setInterval(() => {
+    recSeconds++;
+    if (recSeconds > 180) { stopRecording(); return; } // hard 3-min cap
+    const m = Math.floor(recSeconds/60), s = String(recSeconds%60).padStart(2,'0');
+    document.getElementById('recTimer').textContent = `⏺ ${m}:${s}`;
+  }, 1000);
+  const btn = document.getElementById('btnRecord'); btn.textContent='⏹ Stop'; btn.classList.add('recording');
+}
+
+function stopRecording() {
+  clearInterval(recInterval);
+  document.getElementById('recTimer').style.display = 'none';
+  if (mediaRecorder && mediaRecorder.state!=='inactive') mediaRecorder.stop();
+  const btn = document.getElementById('btnRecord'); btn.textContent='⏺ Record'; btn.classList.remove('recording');
+}
+
+function finaliseRecording() {
+  videoBlob = new Blob(recordedChunks, { type: getSupportedMime() });
+  compressedBlob = videoBlob; // already recorded at low bitrate
+  const url = URL.createObjectURL(videoBlob);
+  document.getElementById('preview').style.display = 'none';
+  const pb = document.getElementById('playback'); pb.src=url; pb.style.display='block';
+  document.getElementById('btnRetake').style.display = '';
+  document.getElementById('btnRecord').disabled = true;
+  checkSendable();
+}
+
+function retake() {
+  videoBlob = compressedBlob = null;
+  document.getElementById('playback').style.display = 'none';
+  const p = document.getElementById('preview'); p.style.display='block';
+  if (stream) { p.srcObject=stream; p.play(); }
+  document.getElementById('btnRecord').disabled = false;
+  document.getElementById('btnRetake').style.display = 'none';
+  checkSendable();
+}
+
+function getSupportedMime() {
+  return ['video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm','video/mp4']
+    .find(t => { try { return MediaRecorder.isTypeSupported(t); } catch(e){ return false; } }) || 'video/webm';
+}
+
+// ── File upload handling ──
+function handleFile(file) {
+  if (!file) return;
+  videoBlob = file;
+  compressedBlob = null; // will compress before upload
+  document.getElementById('uploadFileName').textContent = `✅ ${file.name}  (${(file.size/1024/1024).toFixed(1)} MB)`;
+  document.getElementById('dropZone').style.borderColor = 'var(--gold)';
+  checkSendable();
+}
+
+const dropZone = document.getElementById('dropZone');
+dropZone.addEventListener('dragover', e=>{e.preventDefault();dropZone.classList.add('dragover');});
+dropZone.addEventListener('dragleave', ()=>dropZone.classList.remove('dragover'));
+dropZone.addEventListener('drop', e=>{
+  e.preventDefault(); dropZone.classList.remove('dragover');
+  const f=e.dataTransfer.files[0];
+  if(f && f.type.startsWith('video/')) { document.getElementById('fileInput').files=e.dataTransfer.files; handleFile(f); }
+});
+
+function checkSendable() { document.getElementById('btnSend').disabled = !videoBlob; }
+
+// ── Compress uploaded file via canvas re-encode ──
+async function compressVideo(blob) {
+  return new Promise((resolve, reject) => {
+    const video = document.createElement('video');
+    video.src = URL.createObjectURL(blob);
+    video.muted = true;
+    video.playsInline = true;
+
+    video.onloadedmetadata = () => {
+      // Scale down if > 720p
+      const maxW = 1280, maxH = 720;
+      let w = video.videoWidth, h = video.videoHeight;
+      if (w > maxW) { h = Math.round(h * maxW/w); w = maxW; }
+      if (h > maxH) { w = Math.round(w * maxH/h); h = maxH; }
+
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+
+      const mime = getSupportedMime();
+      const chunks = [];
+      let capRecorder;
       try {
-        stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-        const preview = document.getElementById('preview');
-        preview.srcObject = stream; preview.style.display = 'block'; preview.play();
-        document.getElementById('recordZone').classList.add('has-video');
-        document.getElementById('btnRecord').disabled = false;
-        document.getElementById('btnCamera').style.display = 'none';
-      } catch (e) { alert('Could not access camera. Please allow camera permission and try again.'); }
-    }
- 
-    function toggleRecord() {
-      if (!mediaRecorder || mediaRecorder.state === 'inactive') startRecording();
-      else stopRecording();
-    }
- 
-    function startRecording() {
-      recordedChunks = [];
-      mediaRecorder = new MediaRecorder(stream, { mimeType: getSupportedMime() });
-      mediaRecorder.ondataavailable = e => { if (e.data.size > 0) recordedChunks.push(e.data); };
-      mediaRecorder.onstop = finaliseRecording;
-      mediaRecorder.start(200);
- 
-      recSeconds = 0;
-      document.getElementById('recTimer').style.display = 'block';
-      recInterval = setInterval(() => {
-        recSeconds++;
-        const m = Math.floor(recSeconds / 60), s = String(recSeconds % 60).padStart(2, '0');
-        document.getElementById('recTimer').textContent = `⏺ ${m}:${s}`;
-      }, 1000);
- 
-      const btn = document.getElementById('btnRecord');
-      btn.textContent = '⏹ Stop'; btn.classList.add('recording');
-    }
- 
-    function stopRecording() {
-      clearInterval(recInterval);
-      document.getElementById('recTimer').style.display = 'none';
-      if (mediaRecorder && mediaRecorder.state !== 'inactive') mediaRecorder.stop();
-      const btn = document.getElementById('btnRecord');
-      btn.textContent = '⏺ Record'; btn.classList.remove('recording');
-    }
- 
-    function finaliseRecording() {
-      videoBlob = new Blob(recordedChunks, { type: getSupportedMime() });
-      const url = URL.createObjectURL(videoBlob);
-      document.getElementById('preview').style.display = 'none';
-      const pb = document.getElementById('playback');
-      pb.src = url; pb.style.display = 'block';
-      document.getElementById('btnRetake').style.display = '';
-      document.getElementById('btnRecord').disabled = true;
-      checkSendable();
-    }
- 
-    function retake() {
-      videoBlob = null;
-      document.getElementById('playback').style.display = 'none';
-      const preview = document.getElementById('preview');
-      preview.style.display = 'block';
-      if (stream) { preview.srcObject = stream; preview.play(); }
-      document.getElementById('btnRecord').disabled = false;
-      document.getElementById('btnRetake').style.display = 'none';
-      checkSendable();
-    }
- 
-    function getSupportedMime() {
-      return ['video/mp4', 'video/webm;codecs=vp9', 'video/webm'].find(t => MediaRecorder.isTypeSupported(t)) || 'video/webm';
-    }
- 
-    // ── File upload ──
-    function handleFile(file) {
-      if (!file) return;
-      videoBlob = file;
-      document.getElementById('uploadFileName').textContent = `✅ ${file.name} (${(file.size / 1024 / 1024).toFixed(1)} MB)`;
-      document.getElementById('dropZone').style.borderColor = 'var(--gold)';
-      checkSendable();
-    }
- 
-    const dropZone = document.getElementById('dropZone');
-    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
-    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
-    dropZone.addEventListener('drop', e => {
-      e.preventDefault(); dropZone.classList.remove('dragover');
-      const f = e.dataTransfer.files[0];
-      if (f && f.type.startsWith('video/')) { document.getElementById('fileInput').files = e.dataTransfer.files; handleFile(f); }
-    });
- 
-    function checkSendable() {
-      document.getElementById('btnSend').disabled = !videoBlob;
-    }
- 
-    // ══════════════════════════════════════════════
-    //  RESUMABLE CHUNKED UPLOAD
-    //  1. Ask Apps Script for a Drive resumable upload URL
-    //  2. Stream the file in 5MB chunks directly to Google
-    // ══════════════════════════════════════════════
-    async function uploadVideo() {
-      if (!videoBlob) return;
- 
-      const btn = document.getElementById('btnSend');
-      btn.disabled = true; btn.textContent = 'Uploading…';
- 
-      const wrap = document.getElementById('progressWrap');
-      const bar = document.getElementById('progressBar');
-      const lbl = document.getElementById('progressLabel');
-      wrap.style.display = 'block';
-      setProgress(bar, lbl, 0, 'Getting ready…');
- 
-      try {
-        const ext = videoBlob.type.includes('mp4') ? 'mp4' : 'webm';
-        const fname = `${currentName}_${currentRelation}_${Date.now()}.${ext}`.replace(/\s+/g, '_');
-        const mime = videoBlob.type || 'video/mp4';
- 
-        // Step 1: get resumable upload URL from Apps Script
-        lbl.textContent = 'Connecting to Drive…';
-        const initRes = await fetch(APPS_SCRIPT_URL, {
-          method: 'POST',
-          body: JSON.stringify({
-            action: 'init', fileName: fname, mimeType: mime,
-            name: currentName, relation: currentRelation,
-            fileSize: videoBlob.size
-          })
+        capRecorder = new MediaRecorder(canvas.captureStream(25), {
+          mimeType: mime,
+          videoBitsPerSecond: TARGET_VIDEO_BPS
         });
-        const initJson = await initRes.json();
-        if (initJson.status !== 'ok') throw new Error(initJson.message || 'Init failed');
- 
-        const uploadUrl = initJson.uploadUrl;
- 
-        // Step 2: upload in chunks
-        const totalSize = videoBlob.size;
-        let offset = 0;
- 
-        while (offset < totalSize) {
-          const end = Math.min(offset + CHUNK_SIZE, totalSize);
-          const chunk = videoBlob.slice(offset, end);
- 
-          const chunkRes = await fetch(uploadUrl, {
-            method: 'PUT',
-            headers: {
-              'Content-Range': `bytes ${offset}-${end - 1}/${totalSize}`,
-              'Content-Type': mime
-            },
-            body: chunk
-          });
- 
-          // 308 = Resume Incomplete (chunk accepted, more needed)
-          // 200/201 = complete
-          if (chunkRes.status === 308) {
-            offset = end;
-            const pct = Math.round((offset / totalSize) * 100);
-            setProgress(bar, lbl, pct, `Uploading… ${pct}%  (${(offset / 1024 / 1024).toFixed(1)} / ${(totalSize / 1024 / 1024).toFixed(1)} MB)`);
-          } else if (chunkRes.status === 200 || chunkRes.status === 201) {
-            setProgress(bar, lbl, 100, 'Done! 🎉');
-            break;
-          } else {
-            const errText = await chunkRes.text();
-            throw new Error(`Chunk upload failed (${chunkRes.status}): ${errText}`);
-          }
-        }
- 
-        // Step 3: notify Apps Script to log the submission
-        await fetch(APPS_SCRIPT_URL, {
-          method: 'POST',
-          body: JSON.stringify({ action: 'log', fileName: fname, name: currentName, relation: currentRelation })
-        }).catch(() => { }); // non-fatal
- 
-        setTimeout(() => showSuccess(), 500);
- 
-      } catch (err) {
-        lbl.textContent = '❌ Something went wrong — please try again.';
-        btn.disabled = false; btn.textContent = 'Send my message 🎁';
-        console.error(err);
+      } catch(e) {
+        // Canvas capture not supported — return original
+        resolve(blob); return;
       }
+      capRecorder.ondataavailable = e => { if(e.data.size>0) chunks.push(e.data); };
+      capRecorder.onstop = () => resolve(new Blob(chunks, { type: mime }));
+      capRecorder.start(500);
+
+      video.currentTime = 0;
+      video.play();
+      const draw = () => {
+        if (video.ended || video.paused) { capRecorder.stop(); return; }
+        ctx.drawImage(video, 0, 0, w, h);
+        requestAnimationFrame(draw);
+      };
+      video.onplay = draw;
+      video.onended = () => capRecorder.stop();
+    };
+    video.onerror = () => resolve(blob); // fallback to original on error
+  });
+}
+
+// ── Main upload flow ──
+async function startUpload() {
+  if (!videoBlob) return;
+  const btn = document.getElementById('btnSend');
+  btn.disabled = true; btn.textContent = 'Working…';
+
+  const wrap = document.getElementById('progressWrap');
+  const bar  = document.getElementById('progressBar');
+  const lbl  = document.getElementById('progressLabel');
+  wrap.style.display = 'block';
+
+  try {
+    let uploadBlob = compressedBlob;
+
+    // If uploaded file (not recorded), compress it first
+    if (!uploadBlob) {
+      document.getElementById('compressNotice').style.display = 'block';
+      setProgress(bar, lbl, 2, 'Compressing video…');
+      uploadBlob = await compressVideo(videoBlob);
+      document.getElementById('compressNotice').style.display = 'none';
+      const origMB  = (videoBlob.size/1024/1024).toFixed(1);
+      const compMB  = (uploadBlob.size/1024/1024).toFixed(1);
+      console.log(`Compressed: ${origMB}MB → ${compMB}MB`);
     }
- 
-    function setProgress(bar, lbl, pct, text) {
-      bar.style.width = pct + '%';
-      lbl.textContent = text;
+
+    // Read as base64
+    setProgress(bar, lbl, 5, 'Preparing upload…');
+    const b64 = await blobToBase64(uploadBlob);
+    const totalSize = b64.length;
+    const totalChunks = Math.ceil(totalSize / CHUNK_B64);
+    const ext  = uploadBlob.type.includes('mp4') ? 'mp4' : 'webm';
+    const fname = (currentName + '_' + currentRelation + '_' + Date.now() + '.' + ext).replace(/\s+/g,'_');
+    const sessionId = Math.random().toString(36).slice(2) + Date.now();
+
+    // Send chunks
+    for (let i = 0; i < totalChunks; i++) {
+      const chunk = b64.slice(i * CHUNK_B64, (i+1) * CHUNK_B64);
+      const res = await postJSON({
+        action: 'chunk', sessionId, chunkIndex: i, totalChunks,
+        data: chunk, fileName: fname, mimeType: uploadBlob.type || 'video/webm',
+        name: currentName, relation: currentRelation
+      });
+      if (res.status !== 'ok') throw new Error('Chunk ' + i + ' failed: ' + res.message);
+      const pct = 5 + Math.round(((i+1)/totalChunks) * 80);
+      setProgress(bar, lbl, pct, `Uploading… ${i+1} of ${totalChunks} parts`);
     }
- 
-    function showSuccess() {
-      showSection('sec3');
-      setStep(2, 'done'); setStep(3, 'active');
-      document.getElementById('successMsg').textContent =
-        `Thank you, ${currentName}! Your video is saved. Dad is going to love this 🎂`;
-      if (stream) stream.getTracks().forEach(t => t.stop());
-    }
-  </script>
+
+    // Finalise
+    setProgress(bar, lbl, 90, 'Saving to Drive…');
+    const fin = await postJSON({ action: 'finalise', sessionId });
+    if (fin.status !== 'ok') throw new Error(fin.message || 'Finalise failed');
+
+    setProgress(bar, lbl, 100, 'Done! 🎉');
+    setTimeout(showSuccess, 600);
+
+  } catch(err) {
+    lbl.textContent = '❌ Something went wrong — please try again.';
+    btn.disabled = false; btn.textContent = 'Send my message 🎁';
+    console.error(err);
+  }
+}
+
+function blobToBase64(blob) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload  = () => resolve(r.result.split(',')[1]);
+    r.onerror = () => reject(new Error('File read failed'));
+    r.readAsDataURL(blob);
+  });
+}
+
+async function postJSON(body) {
+  const res = await fetch(APPS_SCRIPT_URL, { method:'POST', body: JSON.stringify(body) });
+  return res.json();
+}
+
+function setProgress(bar, lbl, pct, text) { bar.style.width = pct+'%'; lbl.textContent = text; }
+
+function showSuccess() {
+  showSection('sec3'); setStep(2,'done'); setStep(3,'active');
+  document.getElementById('successMsg').textContent =
+    `Thank you, ${currentName}! Your video is saved. Dad is going to love this 🎂`;
+  if (stream) stream.getTracks().forEach(t => t.stop());
+}
+</script>
 </body>
- 
 </html>
