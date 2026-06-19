@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guess Who — Deepak's Birthday 🕵️</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0D0D0D;--gold:#C9973A;--coral:#D4502A;--cream:#FAF7F2;--muted:#6B6560;--border:#E8E0D4}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--ink);color:#fff;min-height:100vh;overflow-x:hidden}
+
+/* LOCK SCREEN */
+#lockScreen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:40px 24px;text-align:center}
+.lock-icon{font-size:3.5rem;margin-bottom:20px}
+.lock-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,5vw,2.8rem);font-weight:700;color:#fff;margin-bottom:8px}
+.lock-sub{font-size:.9rem;color:rgba(255,255,255,.4);margin-bottom:32px;line-height:1.6;max-width:340px}
+.pin-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;max-width:300px}
+.pin-wrap input{width:100%;padding:16px;border-radius:12px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.06);font-family:'Inter',sans-serif;font-size:1.1rem;color:#fff;text-align:center;letter-spacing:.3em;outline:none;transition:border-color .2s}
+.pin-wrap input:focus{border-color:var(--gold)}
+.pin-wrap input::placeholder{letter-spacing:.05em;color:rgba(255,255,255,.2)}
+.btn-unlock{width:100%;padding:15px;border-radius:100px;background:linear-gradient(135deg,var(--coral),var(--gold));color:#fff;font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600;border:none;cursor:pointer;box-shadow:0 6px 24px rgba(212,80,42,.35);transition:transform .2s}
+.btn-unlock:hover{transform:translateY(-1px)}
+.pin-err{color:#ff8070;font-size:.8rem;display:none;margin-top:4px}
+
+/* REVEAL CONTENT */
+#revealContent{display:none;padding:48px 20px 80px}
+.rev-header{text-align:center;margin-bottom:48px}
+.rev-header h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);font-weight:900;color:#fff;margin-bottom:8px}
+.rev-header p{color:rgba(255,255,255,.4);font-size:.9rem}
+.rev-header .subtitle{font-family:'Dancing Script',cursive;font-size:clamp(1.2rem,3vw,1.6rem);color:var(--gold);margin-bottom:8px}
+.stats{display:flex;justify-content:center;gap:32px;margin-top:20px;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;background:linear-gradient(135deg,var(--coral),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat-lbl{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;max-width:1000px;margin:0 auto}
+.rcard{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px;position:relative;overflow:hidden}
+.rcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--coral),var(--gold))}
+.rcard-num{font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:12px}
+.rcard-name{font-family:'Dancing Script',cursive;font-size:1.5rem;color:var(--gold);margin-bottom:2px}
+.rcard-rel{font-size:.75rem;color:rgba(255,255,255,.35);margin-bottom:16px}
+.rcard-section{margin-bottom:14px}
+.rcard-label{font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:5px}
+.rcard-text{font-family:'Playfair Display',serif;font-size:.95rem;font-style:italic;color:rgba(255,255,255,.85);line-height:1.6}
+.rcard-clue{background:rgba(201,151,58,.08);border:1px solid rgba(201,151,58,.2);border-radius:10px;padding:12px 14px;margin-top:12px}
+.rcard-clue .rcard-label{color:var(--gold)}
+.rcard-clue .rcard-text{color:var(--gold)}
+.rcard-trait{background:rgba(212,80,42,.06);border:1px solid rgba(212,80,42,.15);border-radius:10px;padding:12px 14px;margin-top:8px}
+.rcard-trait .rcard-label{color:var(--coral)}
+.rcard-trait .rcard-text{color:rgba(255,255,255,.7)}
+.has-video{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;color:rgba(255,255,255,.3);margin-top:12px}
+.no-clue{font-size:.8rem;color:rgba(255,255,255,.2);font-style:italic}
+.loading{text-align:center;padding:80px;color:rgba(255,255,255,.3)}
+@media(max-width:600px){.cards{grid-template-columns:1fr}.stats{gap:20px}}
+</style>
+</head>
+<body>
+
+<!-- LOCK SCREEN -->
+<div id="lockScreen">
+  <div class="lock-icon">🕵️</div>
+  <h1 class="lock-title">Guess Who, Deepak?</h1>
+  <p class="lock-sub">Everyone who loves you left a clue. Can you figure out who's who?<br><br>Enter the password to see all their messages.</p>
+  <div class="pin-wrap">
+    <input type="password" id="pinIn" placeholder="Enter password" onkeydown="if(event.key==='Enter')tryUnlock()"/>
+    <button class="btn-unlock" onclick="tryUnlock()">Open 🎁</button>
+    <p class="pin-err" id="pinErr">Wrong password — try again</p>
+  </div>
+</div>
+
+<!-- REVEAL CONTENT -->
+<div id="revealContent">
+  <div class="rev-header">
+    <div class="subtitle">Happy Birthday</div>
+    <h1>Deepak Bhan</h1>
+    <p>Here's what the people in your life wanted you to know — and a few clues to keep you guessing 🕵️</p>
+    <div class="stats">
+      <div class="stat"><div class="stat-num" id="statTotal">—</div><div class="stat-lbl">Messages</div></div>
+      <div class="stat"><div class="stat-num" id="statClues">—</div><div class="stat-lbl">Clues left</div></div>
+      <div class="stat"><div class="stat-num" id="statVideos">—</div><div class="stat-lbl">Videos</div></div>
+    </div>
+  </div>
+  <p class="loading" id="loadingMsg">Loading messages…</p>
+  <div class="cards" id="cardsGrid"></div>
+</div>
+
+<script>
+const sb = supabase.createClient(
+  'https://hxqgdfoefakjrkhrbfuk.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh4cWdkZm9lZmFranJraHJiZnVrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0NTUwMjcsImV4cCI6MjA5NzAzMTAyN30.0Um39Y8XZ6ZOdQ7NY_IGM7XINCavZKdz3D_MBgiKhKY'
+);
+
+// Change this password to whatever you want
+const PASSWORD = 'deepak72';
+
+function tryUnlock() {
+  const val = document.getElementById('pinIn').value.trim();
+  if (val === PASSWORD) {
+    document.getElementById('lockScreen').style.display = 'none';
+    document.getElementById('revealContent').style.display = 'block';
+    loadReveal();
+  } else {
+    document.getElementById('pinErr').style.display = 'block';
+    document.getElementById('pinIn').value = '';
+    document.getElementById('pinIn').focus();
+  }
+}
+
+async function loadReveal() {
+  const { data, error } = await sb.from('contributions').select('*').order('created_at', { ascending: true });
+  document.getElementById('loadingMsg').style.display = 'none';
+  if (error || !data?.length) {
+    document.getElementById('cardsGrid').innerHTML = '<p style="text-align:center;color:rgba(255,255,255,.3);padding:40px">No messages yet.</p>';
+    return;
+  }
+  document.getElementById('statTotal').textContent = data.length;
+  document.getElementById('statClues').textContent = data.filter(c => c.bonus_clue).length;
+  document.getElementById('statVideos').textContent = data.filter(c => c.video_url).length;
+
+  const grid = document.getElementById('cardsGrid');
+  data.forEach((c, i) => {
+    const d = document.createElement('div');
+    d.className = 'rcard';
+    d.innerHTML = `
+      <div class="rcard-num">#${i + 1}</div>
+      <div class="rcard-name">${c.signature || c.name}</div>
+      ${c.relation ? `<div class="rcard-rel">${c.relation}</div>` : ''}
+      ${c.message ? `<div class="rcard-section"><div class="rcard-label">Their message</div><div class="rcard-text">${c.message}</div></div>` : ''}
+      ${c.bonus_clue ? `<div class="rcard-clue"><div class="rcard-label">🕵️ Their clue for you</div><div class="rcard-text">${c.bonus_clue}</div></div>` : '<div class="no-clue" style="margin-top:12px">No clue left — you might just know who this is.</div>'}
+      ${c.bonus_trait ? `<div class="rcard-trait"><div class="rcard-label">✨ Something only you do</div><div class="rcard-text">${c.bonus_trait}</div></div>` : ''}
+      ${c.video_url ? `<div class="has-video">🎥 Video message included</div>` : ''}
+    `;
+    grid.appendChild(d);
+  });
+}
+</script>
+</body>
+</html>
