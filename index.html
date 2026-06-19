@@ -13,24 +13,31 @@
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden}
 
-/* HERO — portrait-first */
+/* HERO */
 .hero{position:relative;width:100%;height:100svh;min-height:580px;overflow:hidden;background:#111}
 .slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
 .slide.active{opacity:1}
 .slide img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
-.slide::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.05) 0%,rgba(0,0,0,.0) 25%,rgba(0,0,0,.55) 65%,rgba(0,0,0,.9) 100%)}
+.slide::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.05) 0%,rgba(0,0,0,0) 25%,rgba(0,0,0,.55) 65%,rgba(0,0,0,.9) 100%)}
 .slide-caption{position:absolute;bottom:148px;left:0;right:0;text-align:center;z-index:2;padding:0 28px}
 .slide-caption-text{font-family:'Dancing Script',cursive;font-size:clamp(1.5rem,5vw,2.4rem);color:#fff;text-shadow:0 2px 24px rgba(0,0,0,.6);line-height:1.35}
 .hero-overlay{position:absolute;bottom:0;left:0;right:0;z-index:3;padding:0 24px 32px;text-align:center}
 .hero-sub{font-size:clamp(.75rem,2.4vw,.9rem);font-weight:300;color:rgba(255,255,255,.6);letter-spacing:.06em;margin-bottom:20px}
 .hero-cta{display:inline-flex;align-items:center;gap:8px;padding:15px 36px;background:linear-gradient(135deg,var(--coral),var(--gold));border-radius:100px;font-size:.9rem;font-weight:600;color:#fff;border:none;cursor:pointer;font-family:'Inter',sans-serif;box-shadow:0 6px 28px rgba(212,80,42,.5);transition:transform .2s,box-shadow .2s;-webkit-tap-highlight-color:transparent}
-.hero-cta:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(212,80,42,.65)}
+.hero-cta:hover{transform:translateY(-2px)}
 .hero-progress{position:absolute;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,.12);z-index:4}
 .hero-progress-bar{height:100%;background:linear-gradient(90deg,var(--coral),var(--gold));width:0%}
-.hero-banner{position:absolute;top:env(safe-area-inset-top,18px);top:max(18px,env(safe-area-inset-top));left:0;right:0;z-index:5;display:flex;justify-content:center;padding:8px 16px 0}
-.hero-banner-inner{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;background:linear-gradient(135deg,var(--coral),var(--gold));border-radius:100px;box-shadow:0 6px 24px rgba(0,0,0,.4);font-family:'Playfair Display',serif;font-weight:700;font-style:italic;font-size:clamp(.85rem,3vw,1.3rem);color:#fff;letter-spacing:.01em;white-space:nowrap;text-shadow:0 1px 8px rgba(0,0,0,.15)}
+.hero-banner{position:absolute;top:max(18px,env(safe-area-inset-top));left:0;right:0;z-index:5;display:flex;justify-content:center;padding:8px 16px 0}
+.hero-banner-inner{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;background:linear-gradient(135deg,var(--coral),var(--gold));border-radius:100px;box-shadow:0 6px 24px rgba(0,0,0,.4);font-family:'Playfair Display',serif;font-weight:700;font-style:italic;font-size:clamp(.85rem,3vw,1.3rem);color:#fff;white-space:nowrap;text-shadow:0 1px 8px rgba(0,0,0,.15)}
 
-/* CARD COLOURS — 10 vivid accent palettes */
+/* WALL */
+.section-head{text-align:center;padding:56px 24px 36px}
+.section-head h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:var(--ink);margin-bottom:6px}
+.section-head p{font-size:.85rem;color:var(--muted);font-weight:300}
+.wall{padding:0 16px 60px}
+.wall-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;max-width:1100px;margin:0 auto}
+
+/* MSG CARDS — colour via CSS vars */
 .msg-card{background:#fff;border:1px solid var(--border);border-radius:6px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,.06);transition:transform .25s,box-shadow .25s;position:relative}
 .msg-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.12)}
 .msg-card::before{content:'\201C';font-family:'Playfair Display',serif;font-size:5rem;line-height:1;position:absolute;top:8px;left:20px;opacity:.18;color:var(--c-accent)}
@@ -41,12 +48,7 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);ove
 .msg-sig-rel{font-size:.72rem;color:var(--muted)}
 .clue-pill{display:inline-block;border-radius:100px;padding:4px 12px;font-size:.7rem;margin-top:8px;font-style:italic;background:var(--c-bg);color:var(--c-accent);border:1px solid var(--c-accent)}
 
-/* WALL */
-.section-head{text-align:center;padding:56px 24px 36px}
-.section-head h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:var(--ink);margin-bottom:6px}
-.section-head p{font-size:.85rem;color:var(--muted);font-weight:300}
-.wall{padding:0 16px 60px}
-.wall-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;max-width:1100px;margin:0 auto}
+/* POLAROIDS — portrait ratio for phone videos */
 .polaroid{background:#fff;padding:10px 10px 44px;box-shadow:0 4px 20px rgba(0,0,0,.13);transform:rotate(var(--tilt,0deg));transition:transform .3s,box-shadow .3s;cursor:pointer}
 .polaroid:hover{transform:rotate(0deg) scale(1.03);box-shadow:0 16px 48px rgba(0,0,0,.2);position:relative;z-index:10}
 .polaroid-screen{width:100%;aspect-ratio:9/16;background:#111;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center}
@@ -57,6 +59,7 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);ove
 .play-circle svg{margin-left:4px}
 .polaroid-name{text-align:center;margin-top:10px;font-family:'Dancing Script',cursive;font-size:1.2rem;color:var(--ink)}
 .polaroid-rel{text-align:center;font-size:.7rem;color:var(--muted);margin-top:2px}
+.polaroid-msg{text-align:center;font-size:.78rem;font-style:italic;color:var(--muted);margin-top:6px;padding:0 4px;line-height:1.4}
 .empty-state{grid-column:1/-1;text-align:center;padding:56px;color:var(--muted);font-style:italic;font-size:.9rem;border:1.5px dashed var(--border);border-radius:4px}
 
 /* FORM */
@@ -66,27 +69,24 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);ove
 .form-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,5vw,2.8rem);font-weight:700;color:#fff;line-height:1.1;margin-bottom:8px}
 .form-sub{font-size:.85rem;font-weight:300;color:rgba(255,255,255,.4);margin-bottom:28px;line-height:1.7}
 .fcard{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:24px 20px}
-.fstate{display:none}
-.fstate.active{display:block}
+.fstate{display:none}.fstate.active{display:block}
 .field{margin-bottom:18px}
 .field label{display:block;font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:7px}
 .field input,.field textarea{width:100%;padding:14px 16px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:12px;font-family:'Inter',sans-serif;font-size:1rem;color:#fff;outline:none;transition:border-color .2s,background .2s;-webkit-appearance:none}
 .field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.2)}
 .field input:focus,.field textarea:focus{border-color:var(--gold);background:rgba(255,255,255,.09)}
-.field textarea{resize:vertical;min-height:115px}
+.field textarea{resize:vertical;min-height:110px}
 .sig-preview{margin-top:8px;font-family:'Dancing Script',cursive;font-size:1.1rem;color:var(--gold);padding:8px 14px;background:rgba(201,151,58,.08);border-radius:8px;border:1px solid rgba(201,151,58,.2)}
-.type-tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px}
-.type-tab{padding:16px 10px;border-radius:12px;border:1.5px solid rgba(255,255,255,.1);background:transparent;font-family:'Inter',sans-serif;font-size:.85rem;font-weight:600;color:rgba(255,255,255,.4);cursor:pointer;transition:all .2s;text-align:center;line-height:1.4;-webkit-tap-highlight-color:transparent}
-.type-tab span{display:block;font-size:1.6rem;margin-bottom:6px}
-.type-tab.active{border-color:var(--gold);background:rgba(201,151,58,.1);color:var(--gold)}
-.type-tab:hover:not(.active){border-color:rgba(255,255,255,.25);color:rgba(255,255,255,.7)}
-.upload-zone{border:2px dashed rgba(255,255,255,.15);border-radius:14px;padding:32px 16px;text-align:center;cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent}
+.divider{display:flex;align-items:center;gap:12px;margin:18px 0}
+.divider span{font-size:.72rem;color:rgba(255,255,255,.25);white-space:nowrap;letter-spacing:.08em;text-transform:uppercase}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.08)}
+.upload-zone{border:2px dashed rgba(255,255,255,.15);border-radius:14px;padding:28px 16px;text-align:center;cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent}
 .upload-zone:hover,.upload-zone.drag{border-color:var(--gold);background:rgba(201,151,58,.05)}
 .upload-zone input{display:none}
-.uicon{font-size:2.2rem;margin-bottom:10px}
-.upload-zone p{font-size:.85rem;color:rgba(255,255,255,.35);line-height:1.6}
+.uicon{font-size:2rem;margin-bottom:8px}
+.upload-zone p{font-size:.82rem;color:rgba(255,255,255,.35);line-height:1.6}
 .upload-zone strong{color:rgba(255,255,255,.8)}
-.uchosen{font-size:.76rem;color:var(--gold);margin-top:10px;font-weight:600}
+.uchosen{font-size:.76rem;color:var(--gold);margin-top:8px;font-weight:600}
 .btn{display:block;width:100%;padding:16px;border-radius:100px;border:none;font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .2s;margin-top:10px;-webkit-tap-highlight-color:transparent}
 .btn-primary{background:linear-gradient(135deg,var(--coral),var(--gold));color:#fff;box-shadow:0 6px 24px rgba(212,80,42,.3)}
 .btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 32px rgba(212,80,42,.45)}
@@ -131,13 +131,14 @@ footer{background:var(--ink);text-align:center;padding:28px;font-size:.72rem;col
   </div>
 </section>
 
-<!-- FORM (now above the wall) -->
+<!-- FORM -->
 <section class="form-section" id="contribute">
   <div class="form-inner">
     <p class="form-eyebrow">Your turn</p>
     <h2 class="form-title">What do you want<br>Deepak to know?</h2>
     <p class="form-sub">Two minutes. He'll carry it for the rest of his life.</p>
     <div class="fcard">
+
       <!-- step 1: who are you -->
       <div class="fstate active" id="fs1">
         <div class="field"><label>Your name</label><input type="text" id="nameIn" placeholder="e.g. Priya" autocomplete="given-name"/></div>
@@ -149,31 +150,31 @@ footer{background:var(--ink);text-align:center;padding:28px;font-size:.72rem;col
         </div>
         <button class="btn btn-primary" onclick="goStep2()">Continue →</button>
       </div>
-      <!-- step 2: message or video -->
+
+      <!-- step 2: message + optional video (both shown, both optional, at least one required) -->
       <div class="fstate" id="fs2">
-        <div class="type-tabs">
-          <button class="type-tab active" onclick="setType('text',this)"><span>✍️</span>Written wish</button>
-          <button class="type-tab" onclick="setType('video',this)"><span>🎥</span>Video message</button>
+        <div class="field">
+          <label>Your written message <span style="font-weight:300;text-transform:none;letter-spacing:0;font-size:.85em">(optional)</span></label>
+          <textarea id="msgIn" placeholder="A memory, a wish, something only you two know. He'll treasure every word…"></textarea>
         </div>
-        <div id="pText">
-          <div class="field"><label>Your message</label><textarea id="msgIn" placeholder="A memory, a wish, something only you two know. He'll treasure every word…"></textarea></div>
-          <button class="btn btn-primary" onclick="submitText()">Send my wish 💛</button>
-        </div>
-        <div id="pVideo" style="display:none">
+        <div class="divider"><span>and / or</span></div>
+        <div class="field">
+          <label>A video message <span style="font-weight:300;text-transform:none;letter-spacing:0;font-size:.85em">(optional)</span></label>
           <div class="upload-zone" id="dropZone" onclick="document.getElementById('vFile').click()">
             <input type="file" id="vFile" accept="video/*" onchange="pickFile(this.files[0])">
             <div class="uicon">🎬</div>
             <p><strong>Tap to choose your video</strong><br>Record on your camera first, then upload here.</p>
             <p class="uchosen" id="vChosen"></p>
           </div>
-          <button class="btn btn-primary" id="btnVid" onclick="submitVideo()" disabled style="margin-top:14px">Upload my video 🎁</button>
         </div>
         <div class="pg-wrap" id="pgWrap"><div class="pg-bar" id="pgBarUp"></div></div>
         <p class="pg-lbl" id="pgLbl"></p>
         <p class="err" id="errMsg"></p>
+        <button class="btn btn-primary" id="btnSubmit" onclick="submitAll()">Send to Deepak 💛</button>
         <button class="btn btn-ghost" onclick="showState('fs1')" style="margin-top:12px">← Back</button>
       </div>
-      <!-- step 3: bonus questions -->
+
+      <!-- step 3: bonus -->
       <div class="fstate" id="fs3">
         <div style="text-align:center;margin-bottom:24px">
           <span style="font-size:2.5rem">🎉</span>
@@ -194,6 +195,7 @@ footer{background:var(--ink);text-align:center;padding:28px;font-size:.72rem;col
         <button class="btn btn-primary" id="btnBonus" onclick="submitBonus()">Finish 🎂</button>
         <button class="btn btn-ghost" onclick="skipBonus()">Skip — I'm done</button>
       </div>
+
       <!-- step 4: done -->
       <div class="fstate" id="fs4">
         <div class="success-inner">
@@ -210,7 +212,7 @@ footer{background:var(--ink);text-align:center;padding:28px;font-size:.72rem;col
   </div>
 </section>
 
-<!-- WALL (now below the form) -->
+<!-- WALL (below the form) -->
 <div class="section-head">
   <h2>What they want you to know</h2>
   <p>Messages from the people who love you most</p>
@@ -234,18 +236,10 @@ const SLIDES = [
   { src: "https://hxqgdfoefakjrkhrbfuk.supabase.co/storage/v1/object/public/photos/Screenshot%202026-06-15%20at%2006.31.16.png", caption: "A friend you can trust — who will always give you his very best" },
 ];
 
-// 10 vivid card colour palettes [accent, light-bg]
 const CARD_PALETTES = [
-  ['#D4502A','#FFF0EB'],  // coral
-  ['#C9973A','#FFF8E8'],  // gold
-  ['#2A8B8B','#E8F8F8'],  // teal
-  ['#7B4FBF','#F2EBFF'],  // purple
-  ['#C4387A','#FFE8F2'],  // hot pink
-  ['#2D6FD4','#E8F0FF'],  // blue
-  ['#2E9456','#E8FFF0'],  // green
-  ['#E07030','#FFF3E8'],  // orange
-  ['#B02AB0','#FBE8FB'],  // magenta
-  ['#3A3AD4','#EBEBFF'],  // indigo
+  ['#D4502A','#FFF0EB'],['#C9973A','#FFF8E8'],['#2A8B8B','#E8F8F8'],
+  ['#7B4FBF','#F2EBFF'],['#C4387A','#FFE8F2'],['#2D6FD4','#E8F0FF'],
+  ['#2E9456','#E8FFF0'],['#E07030','#FFF3E8'],['#B02AB0','#FBE8FB'],['#3A3AD4','#EBEBFF'],
 ];
 
 const DURATION = 5000;
@@ -260,18 +254,14 @@ function buildSlides() {
     hero.insertBefore(div, hero.querySelector('.hero-overlay'));
     slideEls.push(div);
   });
-  startPg();
-  setTimeout(next, DURATION);
+  startPg(); setTimeout(next, DURATION);
 }
-
 function next() {
   slideEls[cur].classList.remove('active');
   cur = (cur + 1) % slideEls.length;
   slideEls[cur].classList.add('active');
-  startPg();
-  setTimeout(next, DURATION);
+  startPg(); setTimeout(next, DURATION);
 }
-
 function startPg() {
   const bar = document.getElementById('heroPgBar');
   bar.style.transition = 'none'; bar.style.width = '0%';
@@ -280,8 +270,9 @@ function startPg() {
   }));
 }
 
+// WALL — oldest first so earliest contributors stay at top
 async function loadWall() {
-  const { data } = await sb.from('contributions').select('*').order('created_at', { ascending: false });
+  const { data } = await sb.from('contributions').select('*').order('created_at', { ascending: true });
   if (!data?.length) return;
   document.getElementById('emptyState')?.remove();
   data.forEach(c => renderCard(c, document.getElementById('wallGrid'), false));
@@ -290,13 +281,17 @@ async function loadWall() {
 function renderCard(c, grid, prepend) {
   const pi = Math.floor(Math.random() * CARD_PALETTES.length);
   const [accent, bg] = CARD_PALETTES[pi];
+
   if (c.video_url) {
+    // Polaroid for video — show message snippet below name if present
     const tilt = (Math.random() * 6 - 3).toFixed(1);
     const d = document.createElement('div');
     d.className = 'polaroid'; d.style.setProperty('--tilt', tilt + 'deg');
-    d.innerHTML = `<div class="polaroid-screen"><video src="${c.video_url}" preload="none" playsinline></video><div class="play-over" onclick="togglePlay(this)"><div class="play-circle"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M5 3l10 6-10 6V3z" fill="#0D0D0D"/></svg></div></div></div><div class="polaroid-name" style="color:${accent}">${c.signature || c.name}</div>${c.relation ? `<div class="polaroid-rel">${c.relation}</div>` : ''}`;
+    const msgSnippet = c.message ? `<div class="polaroid-msg">"${c.message.length > 60 ? c.message.slice(0,60)+'…' : c.message}"</div>` : '';
+    d.innerHTML = `<div class="polaroid-screen"><video src="${c.video_url}" preload="none" playsinline></video><div class="play-over" onclick="togglePlay(this)"><div class="play-circle"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M5 3l10 6-10 6V3z" fill="#0D0D0D"/></svg></div></div></div><div class="polaroid-name" style="color:${accent}">${c.signature || c.name}</div>${c.relation ? `<div class="polaroid-rel">${c.relation}</div>` : ''}${msgSnippet}`;
     prepend ? grid.prepend(d) : grid.appendChild(d);
   } else if (c.message) {
+    // Text card
     const d = document.createElement('div');
     d.className = 'msg-card';
     d.style.setProperty('--c-accent', accent);
@@ -332,17 +327,10 @@ function goStep2() {
   showState('fs2');
   document.getElementById('contribute').scrollIntoView({ behavior: 'smooth' });
 }
-function setType(t, btn) {
-  document.querySelectorAll('.type-tab').forEach(x => x.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('pText').style.display = t === 'text' ? '' : 'none';
-  document.getElementById('pVideo').style.display = t === 'video' ? '' : 'none';
-}
 function pickFile(f) {
   if (!f) return;
   vFile = f;
   document.getElementById('vChosen').textContent = `✅ ${f.name} (${(f.size/1024/1024).toFixed(1)} MB)`;
-  document.getElementById('btnVid').disabled = false;
 }
 const dz = document.getElementById('dropZone');
 dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag'); });
@@ -353,53 +341,58 @@ dz.addEventListener('drop', e => {
   if (f?.type.startsWith('video/')) { document.getElementById('vFile').files = e.dataTransfer.files; pickFile(f); }
 });
 
-async function submitText() {
+// COMBINED SUBMIT — handles text only, video only, or both
+async function submitAll() {
   const msg = document.getElementById('msgIn').value.trim();
-  if (!msg) { document.getElementById('msgIn').focus(); return; }
-  clearErr();
-  const btn = event.target; btn.disabled = true; btn.textContent = 'Sending…';
-  try {
-    const { data, error } = await sb.from('contributions').insert({ name: cName, relation: cRel, signature: cSig, message: msg }).select().single();
-    if (error) throw error;
-    lastId = data.id;
-    document.getElementById('emptyState')?.remove();
-    renderCard(data, document.getElementById('wallGrid'), true);
-    showState('fs3');
-    document.getElementById('contribute').scrollIntoView({ behavior: 'smooth' });
-  } catch(e) {
-    setErr('Something went wrong — please try again.');
-    btn.disabled = false; btn.textContent = 'Send my wish 💛';
+  const hasVideo = !!vFile;
+  const hasText = !!msg;
+  if (!hasText && !hasVideo) {
+    setErr('Please add a message, a video, or both — then tap Send.');
+    return;
   }
-}
-
-async function submitVideo() {
-  if (!vFile) return;
   clearErr();
-  const btn = document.getElementById('btnVid');
-  btn.disabled = true; btn.textContent = 'Uploading…';
-  showPg(true); setPg(10, 'Uploading video…');
-  try {
-    const ext = vFile.name.split('.').pop() || 'mp4';
-    const fname = `${cName}_${Date.now()}.${ext}`.replace(/\s+/g, '_');
-    const { error: se } = await sb.storage.from('videos').upload(fname, vFile, { cacheControl: '3600', upsert: false });
-    if (se) throw se;
-    setPg(88, 'Saving…');
-    const { data: ud } = sb.storage.from('videos').getPublicUrl(fname);
-    const { data, error: de } = await sb.from('contributions').insert({ name: cName, relation: cRel, signature: cSig, video_url: ud.publicUrl }).select().single();
-    if (de) throw de;
-    lastId = data.id;
-    document.getElementById('emptyState')?.remove();
-    renderCard(data, document.getElementById('wallGrid'), true);
-    setPg(100, 'Done! 🎉');
-    setTimeout(() => {
-      showState('fs3');
-      document.getElementById('contribute').scrollIntoView({ behavior: 'smooth' });
-    }, 600);
-  } catch(e) {
-    console.error(e);
-    setErr('Upload failed — please try again.');
-    btn.disabled = false; btn.textContent = 'Upload my video 🎁';
-    showPg(false);
+  const btn = document.getElementById('btnSubmit');
+  btn.disabled = true;
+
+  if (hasVideo) {
+    btn.textContent = 'Uploading video…';
+    showPg(true); setPg(10, 'Uploading video…');
+    try {
+      const ext = vFile.name.split('.').pop() || 'mp4';
+      const fname = `${cName}_${Date.now()}.${ext}`.replace(/\s+/g, '_');
+      const { error: se } = await sb.storage.from('videos').upload(fname, vFile, { cacheControl: '3600', upsert: false });
+      if (se) throw se;
+      setPg(75, 'Saving…');
+      const { data: ud } = sb.storage.from('videos').getPublicUrl(fname);
+      const row = { name: cName, relation: cRel, signature: cSig, video_url: ud.publicUrl };
+      if (hasText) row.message = msg;   // ← include text if also written
+      const { data, error: de } = await sb.from('contributions').insert(row).select().single();
+      if (de) throw de;
+      lastId = data.id;
+      document.getElementById('emptyState')?.remove();
+      renderCard(data, document.getElementById('wallGrid'), true);
+      setPg(100, 'Done! 🎉');
+      setTimeout(() => { showState('fs3'); scrollToForm(); }, 600);
+    } catch(e) {
+      console.error(e);
+      setErr('Upload failed — please try again.');
+      btn.disabled = false; btn.textContent = 'Send to Deepak 💛';
+      showPg(false);
+    }
+  } else {
+    // Text only
+    btn.textContent = 'Sending…';
+    try {
+      const { data, error } = await sb.from('contributions').insert({ name: cName, relation: cRel, signature: cSig, message: msg }).select().single();
+      if (error) throw error;
+      lastId = data.id;
+      document.getElementById('emptyState')?.remove();
+      renderCard(data, document.getElementById('wallGrid'), true);
+      showState('fs3'); scrollToForm();
+    } catch(e) {
+      setErr('Something went wrong — please try again.');
+      btn.disabled = false; btn.textContent = 'Send to Deepak 💛';
+    }
   }
 }
 
@@ -418,7 +411,7 @@ async function submitBonus() {
     showDone();
   } catch(e) {
     console.error(e);
-    errEl.textContent = 'Could not save — tap Skip to continue.';
+    errEl.textContent = 'Could not save extras — tap Skip to continue.';
     errEl.style.display = 'block';
     btn.disabled = false; btn.textContent = 'Finish 🎂';
   }
@@ -427,22 +420,20 @@ async function submitBonus() {
 function skipBonus() { showDone(); }
 function showDone() {
   document.getElementById('doneMsg').textContent = `Thank you, ${cSig || cName}. Deepak is going to be overwhelmed — in the best way. 💛`;
-  showState('fs4');
-  document.getElementById('contribute').scrollIntoView({ behavior: 'smooth' });
+  showState('fs4'); scrollToForm();
 }
 function addAnother() {
   document.getElementById('msgIn').value = '';
   document.getElementById('vFile').value = '';
   document.getElementById('vChosen').textContent = '';
-  document.getElementById('btnVid').disabled = true;
   document.getElementById('clueIn').value = '';
   document.getElementById('traitIn').value = '';
   vFile = null; lastId = null;
   showPg(false); clearErr();
-  showState('fs2');
-  document.getElementById('contribute').scrollIntoView({ behavior: 'smooth' });
+  showState('fs2'); scrollToForm();
 }
 function showState(id) { document.querySelectorAll('.fstate').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); }
+function scrollToForm() { document.getElementById('contribute').scrollIntoView({ behavior: 'smooth' }); }
 function showPg(s) { document.getElementById('pgWrap').style.display = s ? 'block' : 'none'; }
 function setPg(p, t) { document.getElementById('pgBarUp').style.width = p + '%'; document.getElementById('pgLbl').textContent = t; }
 function setErr(m) { const e = document.getElementById('errMsg'); e.textContent = m; e.style.display = 'block'; }
