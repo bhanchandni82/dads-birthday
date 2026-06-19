@@ -192,8 +192,7 @@ footer{background:var(--ink);text-align:center;padding:28px;font-size:.72rem;col
           <span class="sicon">🥳</span>
           <div class="success-name" id="doneName"></div>
           <h3>You just made his birthday.</h3>
-          <p id="doneMsg"></p>
-          <p class="success-thankyou">Thank you so much for making his birthday so special. He's going to treasure every single word. 💛</p>
+          <p class="success-thankyou">Thank you for making this day so special — he is absolutely going to love it! 💛</p>
         </div>
         <div class="add-wrap">
           <p>Got more to say?</p>
@@ -455,8 +454,6 @@ function skipBonus() {
 
 function showDone(name) {
   document.getElementById('doneName').textContent = name;
-  document.getElementById('doneMsg').textContent =
-    `He's going to read this and pretend he's absolutely fine. He won't be fine. That's the point. 💛`;
   showState('fs3');
   scrollToForm();
 }
@@ -469,6 +466,10 @@ function addAnother() {
   document.getElementById('sigPrev').textContent = '— …';
   document.getElementById('clueIn').value = '';
   document.getElementById('traitIn').value = '';
+  const btnS = document.getElementById('btnSubmit');
+  btnS.disabled = false; btnS.textContent = 'Send it 🎁';
+  const btnB = document.getElementById('btnBonus');
+  btnB.disabled = false; btnB.textContent = 'Done — wrap it up 🎂';
   vFile = null; lastId = null;
   showPg(false); clearErr();
   showState('fs1'); scrollToForm();
