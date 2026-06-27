@@ -86,39 +86,13 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);ove
 .add-wrap{text-align:center;margin-top:24px}
 .add-wrap p{font-size:.75rem;color:rgba(255,255,255,.2);margin-bottom:8px}
 
-/* WALL */
-.section-head{text-align:center;padding:60px 24px 36px}
-.section-head h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:var(--ink);margin-bottom:8px}
-.section-head p{font-size:.88rem;color:var(--muted);font-weight:300}
-.wall{padding:0 16px 64px}
-.wall-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;max-width:1100px;margin:0 auto}
-.msg-card{background:#fff;border:1px solid var(--border);border-radius:6px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,.06);transition:transform .25s,box-shadow .25s;position:relative}
-.msg-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.12)}
-.msg-card::before{content:'\201C';font-family:'Playfair Display',serif;font-size:5rem;line-height:1;position:absolute;top:8px;left:20px;opacity:.18;color:var(--c-accent)}
-.msg-text{font-family:'Playfair Display',serif;font-size:1.05rem;font-style:italic;line-height:1.75;color:#1a1a1a;margin-top:28px;margin-bottom:20px}
-.msg-sig{display:flex;align-items:center;gap:10px;border-top:1px solid var(--border);padding-top:14px}
-.msg-sig-bar{width:22px;height:2.5px;background:var(--c-accent);flex-shrink:0;border-radius:2px}
-.msg-sig-name{font-size:.82rem;font-weight:700;color:var(--c-accent)}
-.clue-pill{display:inline-block;border-radius:100px;padding:4px 12px;font-size:.7rem;margin-top:8px;font-style:italic;background:var(--c-bg);color:var(--c-accent);border:1px solid var(--c-accent)}
-/* VIDEO TEASER CARD - static, no play, no click */
-.polaroid{background:#fff;padding:10px 10px 44px;box-shadow:0 4px 20px rgba(0,0,0,.13);transform:rotate(var(--tilt,0deg))}
-.polaroid-screen{width:100%;aspect-ratio:9/16;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center}
-.video-teaser{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,var(--c-accent,#C9973A),var(--c-bg,#FFF8E8))}
-.video-teaser-icon{font-size:2.4rem}
-.video-teaser-text{font-family:'Dancing Script',cursive;font-size:1.1rem;color:#fff;text-align:center;padding:0 14px;text-shadow:0 1px 8px rgba(0,0,0,.25);line-height:1.5}
-.polaroid-name{text-align:center;margin-top:10px;font-family:'Dancing Script',cursive;font-size:1.2rem}
-.empty-state{grid-column:1/-1;text-align:center;padding:56px;color:var(--muted);font-style:italic;font-size:.9rem;border:1.5px dashed var(--border);border-radius:4px}
 footer{background:var(--ink);text-align:center;padding:28px;font-size:.72rem;color:rgba(255,255,255,.18);border-top:1px solid rgba(255,255,255,.05)}
 
 @media(max-width:600px){
-  .wall{padding:0 10px 48px}
-  .wall-grid{grid-template-columns:1fr 1fr;gap:10px}
   .fcard{padding:22px 16px}
-  .section-head{padding:44px 20px 28px}
   .slide-caption{bottom:130px}
   .form-title{font-size:clamp(1.8rem,7vw,2.4rem)}
 }
-@media(max-width:380px){.wall-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -208,17 +182,6 @@ footer{background:var(--ink);text-align:center;padding:28px;font-size:.72rem;col
   </div>
 </section>
 
-<!-- WALL -->
-<div class="section-head">
-  <h2>What they said about you, Deepak.</h2>
-  <p>Read at your own risk. Tissues optional but recommended.</p>
-</div>
-<div class="wall">
-  <div class="wall-grid" id="wallGrid">
-    <div class="empty-state" id="emptyState">Nobody's gone first yet. Don't make him wait. ✨</div>
-  </div>
-</div>
-
 <footer>Made with love · Private page · Only shared with people who care about Deepak 💛</footer>
 
 <script>
@@ -235,12 +198,6 @@ const SLIDES = [
   { src: "https://hxqgdfoefakjrkhrbfuk.supabase.co/storage/v1/object/public/photos/Screenshot%202026-06-15%20at%2006.33.02.png", caption: "Most adorable grandad — my harmonica teacher, my coach and my bestie." },
   { src: "https://hxqgdfoefakjrkhrbfuk.supabase.co/storage/v1/object/public/photos/Screenshot%202026-06-15%20at%2006.33.27.png", caption: "A friend you can trust — who will always give you his very best" },
   { src: "https://hxqgdfoefakjrkhrbfuk.supabase.co/storage/v1/object/public/photos/Screenshot%202026-06-15%20at%2006.34.02.png", caption: "Inventor. Creator. Educator. Mentor." },
-];
-
-const CARD_PALETTES = [
-  ['#D4502A','#FFF0EB'],['#C9973A','#FFF8E8'],['#2A8B8B','#E8F8F8'],
-  ['#7B4FBF','#F2EBFF'],['#C4387A','#FFE8F2'],['#2D6FD4','#E8F0FF'],
-  ['#2E9456','#E8FFF0'],['#E07030','#FFF3E8'],['#B02AB0','#FBE8FB'],['#3A3AD4','#EBEBFF'],
 ];
 
 const DURATION = 5000;
@@ -271,63 +228,6 @@ function startPg() {
   requestAnimationFrame(() => requestAnimationFrame(() => {
     bar.style.transition = `width ${DURATION}ms linear`; bar.style.width = '100%';
   }));
-}
-
-// Oldest first so early contributors stay at top
-async function loadWall() {
-  const { data } = await sb.from('contributions').select('*').order('created_at', { ascending: true });
-  if (!data?.length) return;
-  document.getElementById('emptyState')?.remove();
-  data.forEach(c => renderCard(c, document.getElementById('wallGrid'), false));
-}
-
-function renderCard(c, grid, prepend) {
-  // Same palette for both cards if a person submitted text + video
-  const pi = Math.floor(Math.random() * CARD_PALETTES.length);
-  const [accent, bg] = CARD_PALETTES[pi];
-  const cards = [];
-
-  if (c.video_url) {
-    const tilt = (Math.random() * 6 - 3).toFixed(1);
-    const d = document.createElement('div');
-    d.className = 'polaroid';
-    d.style.setProperty('--tilt', tilt + 'deg');
-    d.style.setProperty('--c-accent', accent);
-    d.style.setProperty('--c-bg', bg);
-    d.innerHTML = `
-      <div class="polaroid-screen">
-        <div class="video-teaser">
-          <div class="video-teaser-icon">🎬</div>
-          <div class="video-teaser-text">Happy birthday from<br>${c.signature || c.name}</div>
-        </div>
-      </div>
-      <div class="polaroid-name" style="color:${accent}">${c.signature || c.name}</div>`;
-    cards.push(d);
-  }
-
-  if (c.message) {
-    const d = document.createElement('div');
-    d.className = 'msg-card';
-    d.style.setProperty('--c-accent', accent);
-    d.style.setProperty('--c-bg', bg);
-    d.innerHTML = `
-      <div class="msg-text">${c.message}</div>
-      ${c.bonus_clue ? `<div class="clue-pill">🕵️ ${c.bonus_clue}</div>` : ''}
-      <div class="msg-sig">
-        <div class="msg-sig-bar"></div>
-        <div>
-          <div class="msg-sig-name">${c.signature || c.name}</div>
-        </div>
-      </div>`;
-    cards.push(d);
-  }
-
-  if (prepend) {
-    // Keep them in order when prepending (video first, then text)
-    [...cards].reverse().forEach(d => grid.prepend(d));
-  } else {
-    cards.forEach(d => grid.appendChild(d));
-  }
 }
 
 let vFile = null, lastId = null;
@@ -384,8 +284,6 @@ async function submitAll() {
       const { data, error: de } = await sb.from('contributions').insert(row).select().single();
       if (de) throw de;
       lastId = data.id;
-      document.getElementById('emptyState')?.remove();
-      renderCard(data, document.getElementById('wallGrid'), true);
       setPg(100, 'Done! 🎉');
       setTimeout(() => { showDone(displayName); }, 700);
     } catch(e) {
@@ -402,8 +300,6 @@ async function submitAll() {
         .select().single();
       if (error) throw error;
       lastId = data.id;
-      document.getElementById('emptyState')?.remove();
-      renderCard(data, document.getElementById('wallGrid'), true);
       showState('fs2');
       scrollToForm();
     } catch(e) {
@@ -476,7 +372,6 @@ function setErr(m) { const e = document.getElementById('errMsg'); e.textContent 
 function clearErr() { document.getElementById('errMsg').style.display = 'none'; }
 
 buildSlides();
-loadWall();
 </script>
 </body>
 </html>
