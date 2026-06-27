@@ -100,16 +100,13 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);ove
 .msg-sig-bar{width:22px;height:2.5px;background:var(--c-accent);flex-shrink:0;border-radius:2px}
 .msg-sig-name{font-size:.82rem;font-weight:700;color:var(--c-accent)}
 .clue-pill{display:inline-block;border-radius:100px;padding:4px 12px;font-size:.7rem;margin-top:8px;font-style:italic;background:var(--c-bg);color:var(--c-accent);border:1px solid var(--c-accent)}
-.polaroid{background:#fff;padding:10px 10px 44px;box-shadow:0 4px 20px rgba(0,0,0,.13);transform:rotate(var(--tilt,0deg));transition:transform .3s,box-shadow .3s;cursor:pointer}
-.polaroid:hover{transform:rotate(0deg) scale(1.03);box-shadow:0 16px 48px rgba(0,0,0,.2);position:relative;z-index:10}
-.polaroid-screen{width:100%;aspect-ratio:9/16;background:#111;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center}
-.polaroid-screen video{width:100%;height:100%;object-fit:cover}
-.play-over{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.25);transition:background .2s}
-.play-over:hover{background:rgba(0,0,0,.1)}
-.play-circle{width:56px;height:56px;background:rgba(255,255,255,.92);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.25)}
-.play-circle svg{margin-left:4px}
+/* VIDEO TEASER CARD - static, no play, no click */
+.polaroid{background:#fff;padding:10px 10px 44px;box-shadow:0 4px 20px rgba(0,0,0,.13);transform:rotate(var(--tilt,0deg))}
+.polaroid-screen{width:100%;aspect-ratio:9/16;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center}
+.video-teaser{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,var(--c-accent,#C9973A),var(--c-bg,#FFF8E8))}
+.video-teaser-icon{font-size:2.4rem}
+.video-teaser-text{font-family:'Dancing Script',cursive;font-size:1.1rem;color:#fff;text-align:center;padding:0 14px;text-shadow:0 1px 8px rgba(0,0,0,.25);line-height:1.5}
 .polaroid-name{text-align:center;margin-top:10px;font-family:'Dancing Script',cursive;font-size:1.2rem}
-.polaroid-rel{text-align:center;font-size:.7rem;color:var(--muted);margin-top:2px}
 .empty-state{grid-column:1/-1;text-align:center;padding:56px;color:var(--muted);font-style:italic;font-size:.9rem;border:1.5px dashed var(--border);border-radius:4px}
 footer{background:var(--ink);text-align:center;padding:28px;font-size:.72rem;color:rgba(255,255,255,.18);border-top:1px solid rgba(255,255,255,.05)}
 
@@ -131,7 +128,7 @@ footer{background:var(--ink);text-align:center;padding:28px;font-size:.72rem;col
   <div class="hero-progress"><div class="hero-progress-bar" id="heroPgBar"></div></div>
   <div class="hero-banner"><div class="hero-banner-inner">🎉&nbsp; Happy Birthday, Deepak Bhan &nbsp;🎉</div></div>
   <div class="hero-overlay">
-    <p class="hero-sub">Born July 1954 &nbsp;·&nbsp; Turning 72 &nbsp;·&nbsp; Still thinks he's 40 :) which is awesome!</p>
+    <p class="hero-sub">Born July 1953 &nbsp;·&nbsp; Turning 72 &nbsp;·&nbsp; Still thinks he's 40</p>
     <button class="hero-cta" onclick="document.getElementById('contribute').scrollIntoView({behavior:'smooth'})">Be part of his 72nd 🎁</button>
   </div>
 </section>
@@ -234,10 +231,10 @@ const SLIDES = [
   { src: "https://hxqgdfoefakjrkhrbfuk.supabase.co/storage/v1/object/public/photos/Screenshot%202026-06-15%20at%2006.31.16.png", caption: "Husband who is there by my side no matter what" },
   { src: "https://hxqgdfoefakjrkhrbfuk.supabase.co/storage/v1/object/public/photos/197686.jpeg", caption: "The young lad who dared to dream different." },
   { src: "https://hxqgdfoefakjrkhrbfuk.supabase.co/storage/v1/object/public/photos/Screenshot%202026-06-15%20at%2006.32.48.png", caption: "The heart of every gathering" },
-  { src: "https://hxqgdfoefakjrkhrbfuk.supabase.co/storage/v1/object/public/photos/DotingFatherMain.jpeg", caption: "Doting father — two kids who can fly because he taught them how" },
+  { src: "https://hxqgdfoefakjrkhrbfuk.supabase.co/storage/v1/object/public/photos/DotingFather.png", caption: "Doting father — two kids who can fly because he taught them how" },
   { src: "https://hxqgdfoefakjrkhrbfuk.supabase.co/storage/v1/object/public/photos/Screenshot%202026-06-15%20at%2006.33.02.png", caption: "Most adorable grandad — my harmonica teacher, my coach and my bestie." },
   { src: "https://hxqgdfoefakjrkhrbfuk.supabase.co/storage/v1/object/public/photos/Screenshot%202026-06-15%20at%2006.33.27.png", caption: "A friend you can trust — who will always give you his very best" },
-  { src: "https://hxqgdfoefakjrkhrbfuk.supabase.co/storage/v1/object/public/photos/20161105_082043.jpg", caption: "Inventor. Creator. Educator. Mentor." },
+  { src: "https://hxqgdfoefakjrkhrbfuk.supabase.co/storage/v1/object/public/photos/Screenshot%202026-06-15%20at%2006.34.02.png", caption: "Inventor. Creator. Educator. Mentor." },
 ];
 
 const CARD_PALETTES = [
@@ -295,19 +292,16 @@ function renderCard(c, grid, prepend) {
     const d = document.createElement('div');
     d.className = 'polaroid';
     d.style.setProperty('--tilt', tilt + 'deg');
+    d.style.setProperty('--c-accent', accent);
+    d.style.setProperty('--c-bg', bg);
     d.innerHTML = `
       <div class="polaroid-screen">
-        <video src="${c.video_url}" preload="none" playsinline></video>
-        <div class="play-over" onclick="togglePlay(this)">
-          <div class="play-circle">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <path d="M5 3l10 6-10 6V3z" fill="#0D0D0D"/>
-            </svg>
-          </div>
+        <div class="video-teaser">
+          <div class="video-teaser-icon">🎬</div>
+          <div class="video-teaser-text">Happy birthday from<br>${c.signature || c.name}</div>
         </div>
       </div>
-      <div class="polaroid-name" style="color:${accent}">${c.signature || c.name}</div>
-      ${c.relation ? `<div class="polaroid-rel">${c.relation}</div>` : ''}`;
+      <div class="polaroid-name" style="color:${accent}">${c.signature || c.name}</div>`;
     cards.push(d);
   }
 
@@ -323,7 +317,6 @@ function renderCard(c, grid, prepend) {
         <div class="msg-sig-bar"></div>
         <div>
           <div class="msg-sig-name">${c.signature || c.name}</div>
-          ${c.relation ? `<div style="font-size:.72rem;color:var(--muted)">${c.relation}</div>` : ''}
         </div>
       </div>`;
     cards.push(d);
@@ -335,16 +328,6 @@ function renderCard(c, grid, prepend) {
   } else {
     cards.forEach(d => grid.appendChild(d));
   }
-}
-
-function togglePlay(ov) {
-  const v = ov.previousElementSibling;
-  if (v.paused) {
-    document.querySelectorAll('video').forEach(x => x.pause());
-    document.querySelectorAll('.play-over').forEach(x => x.style.display = 'flex');
-    v.play(); ov.style.display = 'none';
-    v.addEventListener('ended', () => { ov.style.display = 'flex'; }, { once: true });
-  } else { v.pause(); ov.style.display = 'flex'; }
 }
 
 let vFile = null, lastId = null;
