@@ -50,7 +50,6 @@ body{font-family:'Inter',sans-serif;background:var(--ink);color:#fff;min-height:
 .rcard-trait{background:rgba(212,80,42,.06);border:1px solid rgba(212,80,42,.15);border-radius:10px;padding:12px 14px;margin-top:8px}
 .rcard-trait .rcard-label{color:var(--coral)}
 .rcard-trait .rcard-text{color:rgba(255,255,255,.7)}
-.has-video{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;color:rgba(255,255,255,.3);margin-top:12px}
 .no-clue{font-size:.8rem;color:rgba(255,255,255,.2);font-style:italic}
 .loading{text-align:center;padding:80px;color:rgba(255,255,255,.3)}
 @media(max-width:600px){.cards{grid-template-columns:1fr}.stats{gap:20px}}
@@ -130,7 +129,7 @@ async function loadReveal() {
       ${c.message ? `<div class="rcard-section"><div class="rcard-label">Their message</div><div class="rcard-text">${c.message}</div></div>` : ''}
       ${c.bonus_clue ? `<div class="rcard-clue"><div class="rcard-label">🕵️ Their clue for you</div><div class="rcard-text">${c.bonus_clue}</div></div>` : '<div class="no-clue" style="margin-top:12px">No clue left — you might just know who this is.</div>'}
       ${c.bonus_trait ? `<div class="rcard-trait"><div class="rcard-label">✨ Something only you do</div><div class="rcard-text">${c.bonus_trait}</div></div>` : ''}
-      ${c.video_url ? `<div class="has-video">🎥 Video message included</div>` : ''}
+      ${c.video_url ? `<div class="rcard-section"><div class="rcard-label">🎥 Video message</div><video src="${c.video_url}" controls style="width:100%;border-radius:8px;margin-top:4px;max-height:320px;background:#000"></video></div>` : ''}
     `;
     grid.appendChild(d);
   });
